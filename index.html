@@ -3,186 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tajkin Ahamed | Portfolio</title>
+    <title>Tajkin Ahamed | 3D Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animation Libraries -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            background: linear-gradient(90deg, #60a5fa, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-link {
-            position: relative;
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
 
-        .nav-link::after {
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .profile-container::before {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #2563eb;
-            transition: width 0.3s ease;
+            inset: -5px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(10px);
+            animation: spin 4s linear infinite;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .nav-link {
+            transition: all 0.3s ease;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        .nav-link:hover {
+            color: #60a5fa;
+            text-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="selection:bg-blue-500/30">
+
+    <!-- 3D Background Canvas -->
+    <div id="canvas-container"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold gradient-text">TA</a>
+            <a href="#" class="text-2xl font-bold gradient-text tracking-tighter">TAJKIN.</a>
             <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#home" class="nav-link hover:text-blue-600">Home</a>
-                <a href="#about" class="nav-link hover:text-blue-600">About</a>
-                <a href="#skills" class="nav-link hover:text-blue-600">Skills</a>
-                <a href="#projects" class="nav-link hover:text-blue-600">Projects</a>
-                <a href="#contact" class="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">Contact</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-500/20">Hire Me</a>
             </div>
-            <!-- Mobile Menu Toggle (Simplified) -->
-            <button class="md:hidden text-slate-600">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center pt-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-blue-600 font-semibold mb-2 tracking-wide uppercase">Hello, I'm</h2>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-slate-900">Tajkin Ahamed</h1>
-                <p class="text-xl text-slate-600 mb-8 leading-relaxed">
-                    A Full Stack Developer specializing in building high-performance, user-centric web applications using modern technologies.
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <h2 class="text-blue-400 font-semibold mb-2 tracking-widest uppercase">Full Stack Architect</h2>
+                <h1 class="text-6xl md:text-8xl font-extrabold mb-6 leading-none">
+                    Tajkin <br><span class="gradient-text">Ahamed</span>
+                </h1>
+                <p class="text-xl text-slate-400 mb-8 leading-relaxed max-w-lg">
+                    Crafting immersive digital experiences with code. Specialized in turning complex problems into elegant 3D and web solutions.
                 </p>
-                <div class="flex space-x-4">
-                    <a href="#projects" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">View Work</a>
-                    <a href="#contact" class="px-8 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition">Let's Talk</a>
+                <div class="flex space-x-6">
+                    <a href="#projects" class="px-8 py-4 bg-white text-slate-900 rounded-full font-bold hover:bg-blue-500 hover:text-white transition-all transform hover:-translate-y-1">View Projects</a>
+                    <a href="#contact" class="px-8 py-4 glass text-white rounded-full font-bold hover:bg-white/10 transition-all">Contact Me</a>
                 </div>
             </div>
-            <div class="flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:h-80">
-                    <div class="absolute inset-0 bg-blue-100 rounded-3xl rotate-6"></div>
-                    <div class="absolute inset-0 bg-blue-600 rounded-3xl -rotate-3 opacity-10"></div>
-                    <div class="relative w-full h-full bg-slate-200 rounded-3xl overflow-hidden flex items-center justify-center">
-                        <!-- Placeholder for Profile Image -->
-                        <i class="fas fa-user text-8xl text-slate-400"></i>
-                    </div>
+            <div class="flex justify-center relative" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="profile-container relative w-64 h-64 md:w-96 md:h-96 floating">
+                    <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Tajkin Anime Profile" 
+                         class="w-full h-full object-cover rounded-full border-4 border-slate-900 shadow-2xl">
                 </div>
+                <!-- Decorative Elements -->
+                <div class="absolute -top-4 -right-4 w-20 h-20 bg-blue-500/20 rounded-full blur-2xl animate-pulse"></div>
+                <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-8">About Me</h2>
-            <p class="text-lg text-slate-600 leading-relaxed">
-                I am a dedicated and detail-oriented developer with a passion for building clean, scalable, and user-centric applications. 
-                With experience in modern web technologies, I am committed to continuous learning and excellence in software craftsmanship. 
-                I enjoy solving complex problems and turning ideas into functional, beautiful realities.
+    <section id="about" class="py-32 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-bold mb-6 border border-blue-500/20">
+                MY STORY
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Beyond the Code</h2>
+            <p class="text-xl text-slate-400 leading-relaxed italic">
+                "I don't just build websites; I build digital ecosystems. My journey is fueled by a relentless curiosity for how technology can bridge the gap between imagination and reality."
             </p>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-24 bg-white">
+    <section id="skills" class="py-24">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-16">Technical Expertise</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="p-6 bg-slate-50 rounded-xl text-center">
-                    <i class="fab fa-react text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="font-bold">Frontend</h3>
-                    <p class="text-sm text-slate-500 mt-2">React, Next.js, Tailwind</p>
+            <h2 class="text-3xl font-bold text-center mb-16" data-aos="fade-up">Tech Stack</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Skill Cards with Hover Animation -->
+                <div class="glass p-8 rounded-3xl text-center group hover:bg-blue-600/10 transition-all cursor-default" data-aos="flip-left">
+                    <i class="fab fa-react text-5xl text-blue-400 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg">Frontend</h3>
                 </div>
-                <div class="p-6 bg-slate-50 rounded-xl text-center">
-                    <i class="fab fa-node-js text-4xl text-green-500 mb-4"></i>
-                    <h3 class="font-bold">Backend</h3>
-                    <p class="text-sm text-slate-500 mt-2">Node.js, Express, Python</p>
+                <div class="glass p-8 rounded-3xl text-center group hover:bg-green-600/10 transition-all cursor-default" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fab fa-node-js text-5xl text-green-500 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg">Backend</h3>
                 </div>
-                <div class="p-6 bg-slate-50 rounded-xl text-center">
-                    <i class="fas fa-database text-4xl text-indigo-500 mb-4"></i>
-                    <h3 class="font-bold">Database</h3>
-                    <p class="text-sm text-slate-500 mt-2">PostgreSQL, MongoDB</p>
+                <div class="glass p-8 rounded-3xl text-center group hover:bg-indigo-600/10 transition-all cursor-default" data-aos="flip-left" data-aos-delay="200">
+                    <i class="fas fa-cube text-5xl text-indigo-400 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg">Three.js</h3>
                 </div>
-                <div class="p-6 bg-slate-50 rounded-xl text-center">
-                    <i class="fab fa-git-alt text-4xl text-orange-500 mb-4"></i>
-                    <h3 class="font-bold">DevOps</h3>
-                    <p class="text-sm text-slate-500 mt-2">Git, AWS, Docker</p>
+                <div class="glass p-8 rounded-3xl text-center group hover:bg-orange-600/10 transition-all cursor-default" data-aos="flip-left" data-aos-delay="300">
+                    <i class="fab fa-aws text-5xl text-orange-400 mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-lg">Cloud</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-24 bg-slate-50">
+    <section id="projects" class="py-24">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-16">
-                <div>
-                    <h2 class="text-3xl font-bold">Featured Projects</h2>
-                    <p class="text-slate-600 mt-2">Some of the things I've built recently.</p>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
+            <h2 class="text-3xl font-bold mb-16" data-aos="fade-right">Selected Works</h2>
+            <div class="grid md:grid-cols-2 gap-10">
                 <!-- Project 1 -->
-                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-200">
-                    <div class="h-56 bg-slate-200 flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-5xl text-slate-400"></i>
+                <div class="group relative glass rounded-3xl overflow-hidden border-white/5" data-aos="fade-up">
+                    <div class="h-64 bg-gradient-to-br from-blue-600/20 to-purple-600/20 relative overflow-hidden">
+                         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover mix-blend-overlay group-hover:scale-110 transition-transform duration-700">
+                         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/60 backdrop-blur-sm">
+                            <button class="px-6 py-2 bg-white text-slate-900 rounded-full font-bold">View Case Study</button>
+                         </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
-                        <p class="text-slate-600 mb-6">A full-stack responsive web app with Stripe integration and user authentication.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">React</span>
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">Node.js</span>
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">MongoDB</span>
+                        <h3 class="text-2xl font-bold mb-2">Metaverse Dashboard</h3>
+                        <p class="text-slate-400 mb-4">A high-performance analytics tool for virtual real estate assets.</p>
+                        <div class="flex gap-3">
+                            <span class="text-xs font-bold text-blue-400">REACT</span>
+                            <span class="text-xs font-bold text-purple-400">THREE.JS</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
-                            View Project <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
-
                 <!-- Project 2 -->
-                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-200">
-                    <div class="h-56 bg-slate-200 flex items-center justify-center">
-                        <i class="fas fa-tasks text-5xl text-slate-400"></i>
+                <div class="group relative glass rounded-3xl overflow-hidden border-white/5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-64 bg-gradient-to-br from-emerald-600/20 to-blue-600/20 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover mix-blend-overlay group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/60 backdrop-blur-sm">
+                           <button class="px-6 py-2 bg-white text-slate-900 rounded-full font-bold">View Case Study</button>
+                        </div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-2">Task Management Pro</h3>
-                        <p class="text-slate-600 mb-6">Real-time collaborative dashboard with drag-and-drop and automated alerts.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">Next.js</span>
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">Firebase</span>
-                            <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">Tailwind</span>
+                        <h3 class="text-2xl font-bold mb-2">Crypto Pulse</h3>
+                        <p class="text-slate-400 mb-4">Real-time cryptocurrency tracking with interactive 3D visualizations.</p>
+                        <div class="flex gap-3">
+                            <span class="text-xs font-bold text-emerald-400">NEXT.JS</span>
+                            <span class="text-xs font-bold text-blue-400">D3.JS</span>
                         </div>
-                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 flex items-center">
-                            View Project <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -190,87 +208,130 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
-                    <p class="text-slate-600 mb-8">
-                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                    </p>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Email</h4>
-                                <p class="text-slate-600">tajkin.ahamed@email.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fab fa-linkedin-in"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">LinkedIn</h4>
-                                <p class="text-slate-600">linkedin.com/in/tajkin-ahamed</p>
-                            </div>
-                        </div>
+    <section id="contact" class="py-24 bg-blue-600/5">
+        <div class="max-w-6xl mx-auto px-6" data-aos="zoom-in">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Ready to Initiate?</h2>
+                <p class="text-slate-400 text-lg">Let's build something extraordinary together.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Email Card -->
+                <a href="mailto:tajkinahmed0822@gmail.com" class="glass p-8 rounded-3xl text-center hover:bg-blue-600/10 transition-all group">
+                    <div class="w-16 h-16 bg-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-envelope text-2xl text-blue-400"></i>
                     </div>
-                </div>
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200">
-                    <form id="contact-form" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Name</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" placeholder="john@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-2">Message</label>
-                            <textarea class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white h-32" placeholder="How can I help you?"></textarea>
-                        </div>
-                        <button type="button" onclick="handleForm()" class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">Send Message</button>
-                    </form>
-                    <div id="form-message" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg text-center font-medium">
-                        Message sent successfully!
+                    <h3 class="font-bold text-xl mb-2">Email Me</h3>
+                    <p class="text-slate-400 break-all">tajkinahmed0822@gmail.com</p>
+                </a>
+
+                <!-- Phone Card -->
+                <a href="tel:01309654611" class="glass p-8 rounded-3xl text-center hover:bg-green-600/10 transition-all group">
+                    <div class="w-16 h-16 bg-green-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-phone-alt text-2xl text-green-400"></i>
                     </div>
-                </div>
+                    <h3 class="font-bold text-xl mb-2">Call Me</h3>
+                    <p class="text-slate-400">01309654611</p>
+                </a>
+
+                <!-- WhatsApp Card -->
+                <a href="https://wa.me/8801309654611" target="_blank" class="glass p-8 rounded-3xl text-center hover:bg-emerald-600/10 transition-all group">
+                    <div class="w-16 h-16 bg-emerald-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-whatsapp text-2xl text-emerald-400"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">WhatsApp</h3>
+                    <p class="text-slate-400">Direct Message</p>
+                </a>
+            </div>
+
+            <div class="mt-16 flex justify-center space-x-6">
+                <a href="#" class="w-14 h-14 glass rounded-xl flex items-center justify-center hover:bg-white/10 transition-all"><i class="fab fa-github text-xl"></i></a>
+                <a href="#" class="w-14 h-14 glass rounded-xl flex items-center justify-center hover:bg-white/10 transition-all"><i class="fab fa-linkedin text-xl"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 bg-slate-900 text-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-2xl font-bold mb-6">Tajkin Ahamed</h2>
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="hover:text-blue-400 transition text-xl"><i class="fab fa-github"></i></a>
-                <a href="#" class="hover:text-blue-400 transition text-xl"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="hover:text-blue-400 transition text-xl"><i class="fab fa-twitter"></i></a>
-            </div>
-            <p class="text-slate-500 text-sm">© 2024 Tajkin Ahamed. All rights reserved.</p>
-        </div>
+    <footer class="py-10 text-center text-slate-500 border-t border-white/5">
+        <p>© 2024 DESIGNED & BUILT BY TAJKIN AHAMED</p>
     </footer>
 
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        function handleForm() {
-            const form = document.getElementById('contact-form');
-            const message = document.getElementById('form-message');
-            
-            // Basic UI feedback since we can't send real emails from a static file
-            form.style.display = 'none';
-            message.classList.remove('hidden');
-            
-            setTimeout(() => {
-                message.classList.add('hidden');
-                form.style.display = 'block';
-                form.reset();
-            }, 3000);
+        // Initialize Scroll Animations
+        AOS.init({
+            once: true,
+            mirror: false
+        });
+
+        // --- Three.js 3D Background Logic ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Create Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i=0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15;
         }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#60a5fa',
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, material);
+        scene.add(particlesMesh);
+
+        camera.position.z = 3;
+
+        // Mouse Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.0005;
+
+            // Follow mouse movement smoothly
+            particlesMesh.position.x += (mouseX * 0.5 - particlesMesh.position.x) * 0.05;
+            particlesMesh.position.y += (-mouseY * 0.5 - particlesMesh.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        window.onload = animate;
     </script>
 </body>
 </html>
